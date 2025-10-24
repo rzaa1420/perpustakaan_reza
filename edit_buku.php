@@ -22,6 +22,29 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
         header("location: buku.php");
 }
 
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $id_buku = $_POST["id"];
+    $judul = $_POST['judul'];
+    $penulis = $_POST['penulis'];
+    $penerbit = $_POST['penerbit'];
+    $tahun_terbit = $_POST['tahun_terbit'];
+    $stok = $_POST['stok'];
+
+    $sql = "UPDATE buku SET judul=?, penulis=?, penerbit=?, tahun_terbit=?, stok=? WHERE id_buku=?";
+
+    if ($stmt = $mysqli->prepare($sql)) {
+        $stmt->bind_param("sssiii", $judul, $penulis, $penerbit, $tahun_terbit, $stok, $id_buku);
+        if ($stmt->execute()) {  
+            header("location: buku.php");
+            exit();
+        } else {
+            echo"Error: Gagal menyimpan data.";
+        }
+        $stmt->close();
+    }
+    $mysqli->close();
+}
 ?>
 <!doctype html>
 <html lang="en">
