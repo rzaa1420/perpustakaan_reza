@@ -22,7 +22,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
         header("location: buku.php");
 }
 
-
+//Proses update data  
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id_buku = $_POST["id"];
     $judul = $_POST['judul'];
@@ -58,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="container mt-4">
         <h2>Edit Buku</h2>
         <form action="edit_buku.php" method="post">
-            <input type="hidden" value="<?php echo $buku['id_buku'] ?>" />
+            <input type="hidden" value="<?php echo $buku['id_buku'] ?>" name="id" />
             <div class="mb-3">
                 <label for="judul" class="form-label">Judul</label>
                 <input type="text" name="judul" class="form-control" id="judul" value="<?php echo $buku['judul'] ?>" required>
